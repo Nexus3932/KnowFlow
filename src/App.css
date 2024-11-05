@@ -1,0 +1,139 @@
+.main-body {
+    width: 0;
+    transform: translateY(77px) translateX(110px);
+    padding: 3px 10px;
+}
+
+.main-body > div:first-child {
+    display: flex;
+    width: 800px;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    transform: translateX(225px) translateY(15px);
+}
+
+.main-body > div:first-child ul {
+    display: flex;
+}
+
+.app-tags, .app-hot-questions {
+    position: fixed;
+    z-index: 200;
+    transform: translateX(1190px) translateY(60px);
+    width: 300px;
+    border: 1px solid #333333;
+    border-radius: 5px;
+}
+
+.app-tags {
+    height: 120px;
+}
+
+.app-hot-questions {
+    transform: translateX(1190px) translateY(200px);
+}
+
+.app-tags > div:first-child {
+    height: 35px;
+    line-height: 35px;
+    padding: 3px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.app-tags > div:first-child span {
+    transform: translateY(-2px);
+}
+
+.app-tags > div:first-child >span >span {
+    font-size: 10px;
+}
+
+.app-tags > div:first-child span:nth-child(2) {
+    color: #4169E1;
+    cursor: grab;
+}
+
+.app-tags > div:nth-child(2) {
+    padding: 3px 10px;
+    position: relative;
+}
+
+.app-tags-button {
+    position: absolute;
+    top: 20px;
+}
+
+
+.app-tags > div:first-child, .app-hot-questions > div:first-child {
+    background-color: rgb(248, 248, 248);
+}
+
+.app-hot-questions {
+    height: 350px;
+}
+
+.app-hot-questions > div:first-child {
+    height: 35px;
+    line-height: 35px;
+    padding: 3px 10px;
+}
+.app-hot-questions > div:first-child span {
+    transform: translateY(-10px);
+}
+
+.app-hot-questions > div:nth-child(2) {
+    overflow: auto;
+    padding: 3px 10px;
+}
+
+.main-body >div:nth-child(1) > span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.main-body ul {
+    font-size: 17px;
+    color: rgb(108, 117, 125);
+}
+
+.main-body> div:first-child > ul > li {
+    border-top: 3px solid gray;
+    border-bottom: 3px solid gray;
+    border-left: 3px solid gray;
+    border-radius: 20px;
+    margin-left: 3px;
+}
+
+.main-body> div:first-child > ul > li:nth-child(6) {
+    border-right: 3px solid gray;
+}
+
+.main-body> div:first-child > ul > li:nth-child(1) {
+    background-color: rgb(108, 117, 125);
+    color: #ffffff;
+}
+
+button {
+    z-index: 300;
+}
+
+.main-body > div:first-child {
+    border-bottom: 3px solid rgb(234, 237, 240);
+    z-index: 200;
+    background-color: rgba(255, 255, 255, 0.8)
+}
+
+.questions {
+    transform: translateY(-4px);
+}
+
+.main-body > div:nth-child(2) {
+    transform: translateY(20px) translateX(-6px);
+}
+
+.main-body > div:nth-child(1) > ul > li {
+    cursor: grab;
+}
+

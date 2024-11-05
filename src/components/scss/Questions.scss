@@ -1,0 +1,36 @@
+.questions {
+  border-left: 3px solid rgb(248, 249, 250);
+  border-right: 3px solid rgb(248, 249, 250);
+  position: absolute;
+  left: 200px;
+  width: 870px;
+  height: 450px;
+  overflow: auto;
+  padding: 10px 0 0 32px;
+
+  >ul {
+    >li {
+      height: 110px;
+      width: 800px;
+      padding-top: 10px;
+      border-bottom: 3px solid rgb(234, 237, 240);
+
+
+      >li:nth-child(1) {
+        padding-top: 0;
+      }
+
+      .question-icon {
+        display: inline-block;
+      }
+
+      .questions-info {
+        margin: 3px 0;
+      }
+    }
+  }
+}
+
+.question-name {
+  cursor: grab;
+}

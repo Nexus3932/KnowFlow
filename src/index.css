@@ -1,0 +1,104 @@
+/* 重置边距和填充 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 设定盒模型 */
+}
+
+/* 设置全局字体和行高 */
+html, body {
+  font-size: 16px;
+  /* 统一字体 */
+  font-family: Arial, sans-serif;
+  /* 行高 */
+  line-height: 1.6;
+  /* 默认文本颜色 */
+  color: #333;
+  /* 默认背景颜色 */
+  background-color: #f9f9f9;
+}
+
+/* 去除列表样式 */
+ul, ol {
+  list-style: none; /* 去掉默认的列表样式 */
+}
+
+/* 设置链接样式 */
+a {
+  text-decoration: none; /* 去掉下划线 */
+  color: inherit; /* 继承父元素的颜色 */
+  transition: color 0.3s; /* 添加过渡效果 */
+}
+
+a:hover {
+  color: #007bff; /* 悬停时改变颜色 */
+}
+
+/* 表格样式 */
+table {
+  border-collapse: collapse; /* 合并边框 */
+  width: 100%; /* 表格宽度 */
+}
+
+th, td {
+  border: 1px solid #ddd; /* 设置边框 */
+  padding: 8px; /* 内边距 */
+  text-align: left; /* 文本左对齐 */
+}
+
+/* 图片样式 */
+img {
+  max-width: 100%; /* 确保图片响应式 */
+  height: auto; /* 保持图片比例 */
+}
+
+/* 表单元素样式 */
+input, textarea, select, button {
+  font-family: inherit; /* 继承字体 */
+  font-size: inherit; /* 继承字体大小 */
+  border: 1px solid #ccc; /* 默认边框 */
+  border-radius: 4px; /* 圆角 */
+  padding: 8px; /* 内边距 */
+}
+
+/* 隐藏滚动条 对于Chrome、Safari */
+/*body::-webkit-scrollbar {
+    display: none;
+}*/
+
+/* 设置默认颜色和背景 */
+html {
+  color: #000; /* 默认文本颜色 */
+  background-color: #fff; /* 默认背景颜色 */
+}
+
+/* 自定义滚动条整体 */
+::-webkit-scrollbar {
+  width: 12px; /* 宽度 */
+  height: 24px; /* 高度 */
+}
+
+/* 自定义滚动条轨道 */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 轨道背景 */
+  border-radius: 10px; /* 圆角 */
+}
+
+/* 自定义滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  background: #888; /* 滑块颜色 */
+  border-radius: 10px; /* 圆角 */
+}
+
+/* 鼠标悬停时的滑块样式 */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* 悬停颜色 */
+}
+
+/* 自定义文本选择样式 */
+::selection {
+  background-color: #B3E5FC; /* 浅蓝色背景 */
+  color: #004D40; /* 深绿色文本 */
+}
+
+

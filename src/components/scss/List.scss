@@ -1,0 +1,25 @@
+.list-container {
+  position: fixed;
+  top: 77px;
+  left: 116px;
+  width: 195px;
+  height: 500px;
+  padding-top: 19px;
+  padding-left: 7px;
+
+  Button {
+    border: none;
+    width: 150px;
+  }
+
+  .list-container-div2 {
+    padding-top: 30px;
+
+    span {
+      display: inline-block;
+      transform: translateX(14px);
+      margin-bottom: 5px;
+      font-weight: normal;
+    }
+  }
+}
