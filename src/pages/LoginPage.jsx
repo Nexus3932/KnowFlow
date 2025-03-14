@@ -1,7 +1,31 @@
 import { useState } from "react";
-import "../components/scss/LoginPage.scss";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  FormControl,
+  FormLabel,
+  Input,
+  Checkbox,
+  Button,
+  Link,
+  Text,
+  Flex,
+  HStack,
+  Box,
+  FormErrorMessage,
+  useDisclosure,
+  ChakraProvider,
+} from "@chakra-ui/react";
 
 function LoginPage() {
+  // Modal状态管理 - 默认打开，且不允许关闭
+  const { isOpen, onOpen } = useDisclosure({ defaultIsOpen: true });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   // 状态管理
   const [formData, setFormData] = useState({
     username: "",
@@ -40,6 +64,9 @@ function LoginPage() {
         console.log("登录信息:", formData);
         // 模拟API调用
         await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // 登录成功，设置状态
+        setIsLoggedIn(true);
         alert("登录成功!");
       } catch (error) {
         console.error("登录失败:", error);
@@ -51,82 +78,123 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <h1>欢迎登录</h1>
+    <ChakraProvider>
+      <Modal
+        isOpen={isOpen && !isLoggedIn}
+        onClose={() => {}} // 空函数防止模态框关闭
+        closeOnOverlayClick={false} // 禁止点击背景关闭
+        closeOnEsc={false} // 禁止Esc键关闭
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader textAlign="center">欢迎登录</ModalHeader>
 
-        {errors.general && (
-          <div className="error-message">{errors.general}</div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">用户名或邮箱</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder="请输入用户名或邮箱"
-            />
-            {errors.username && (
-              <span className="error">{errors.username}</span>
+          <ModalBody pb={6}>
+            {errors.general && (
+              <Box
+                p={3}
+                mb={4}
+                bg="red.50"
+                color="red.500"
+                borderRadius="md"
+                textAlign="center"
+              >
+                {errors.general}
+              </Box>
             )}
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="password">密码</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="请输入密码"
-            />
-            {errors.password && (
-              <span className="error">{errors.password}</span>
-            )}
-          </div>
+            <form onSubmit={handleSubmit}>
+              <FormControl isInvalid={!!errors.username} mb={4}>
+                <FormLabel htmlFor="username">用户名或邮箱</FormLabel>
+                <Input
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  placeholder="请输入用户名或邮箱"
+                />
+                {errors.username && (
+                  <FormErrorMessage>{errors.username}</FormErrorMessage>
+                )}
+              </FormControl>
 
-          <div className="form-footer">
-            <div className="remember-me">
-              <input
-                type="checkbox"
-                id="rememberMe"
-                name="rememberMe"
-                checked={formData.rememberMe}
-                onChange={handleChange}
-              />
-              <label htmlFor="rememberMe">记住我</label>
-            </div>
-            <a href="/forgot-password" className="forgot-password">
-              忘记密码?
-            </a>
-          </div>
+              <FormControl isInvalid={!!errors.password} mb={4}>
+                <FormLabel htmlFor="password">密码</FormLabel>
+                <Input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="请输入密码"
+                />
+                {errors.password && (
+                  <FormErrorMessage>{errors.password}</FormErrorMessage>
+                )}
+              </FormControl>
 
-          <button type="submit" className="login-button" disabled={isLoading}>
-            {isLoading ? "登录中..." : "登录"}
-          </button>
-        </form>
+              <Flex justify="space-between" mb={4}>
+                <Checkbox
+                  id="rememberMe"
+                  name="rememberMe"
+                  isChecked={formData.rememberMe}
+                  onChange={handleChange}
+                >
+                  记住我
+                </Checkbox>
+                <Link color="blue.500" href="/forgot-password">
+                  忘记密码?
+                </Link>
+              </Flex>
 
-        <div className="social-login">
-          <p>或通过以下方式登录</p>
-          <div className="social-icons">
-            <button className="social-icon wechat">微信</button>
-            <button className="social-icon weibo">微博</button>
-            <button className="social-icon qq">QQ</button>
-          </div>
-        </div>
+              <Button
+                colorScheme="blue"
+                width="full"
+                type="submit"
+                isLoading={isLoading}
+                mb={4}
+              >
+                {isLoading ? "登录中..." : "登录"}
+              </Button>
+            </form>
 
-        <div className="register-link">
-          <p>
-            还没有账号? <a href="/register">立即注册</a>
-          </p>
-        </div>
-      </div>
-    </div>
+            <Box textAlign="center" mt={4}>
+              <Text mb={2}>或通过以下方式登录</Text>
+              <HStack spacing={4} justify="center">
+                <Button colorScheme="green" variant="outline" size="sm">
+                  微信
+                </Button>
+                <Button colorScheme="red" variant="outline" size="sm">
+                  微博
+                </Button>
+                <Button colorScheme="blue" variant="outline" size="sm">
+                  QQ
+                </Button>
+              </HStack>
+            </Box>
+          </ModalBody>
+
+          <ModalFooter justifyContent="center">
+            <Text>
+              还没有账号?{" "}
+              <Link color="blue.500" href="/register">
+                立即注册
+              </Link>
+            </Text>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* 登录成功后显示主应用内容 */}
+      {isLoggedIn && (
+        <Box p={5}>
+          <Text fontSize="xl">您已成功登录！</Text>
+          <Text mt={2}>现在您可以访问网站的所有内容</Text>
+          {/* 这里可以放置应用的主要内容 */}
+        </Box>
+      )}
+    </ChakraProvider>
   );
 }
 
