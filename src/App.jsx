@@ -4,6 +4,7 @@ import Header from "./components/Header.jsx";
 import List from "./components/List.jsx";
 import Footer from "./components/Footer.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 // 导入其他页面组件
 import "./App.css";
 
@@ -31,6 +32,8 @@ function App() {
 
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+
             {/* 添加其他路由 */}
             {/* <Route path="/questions/:id" element={<QuestionDetail />} /> */}
             {/* <Route path="/tags" element={<TagsPage />} /> */}
