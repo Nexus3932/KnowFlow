@@ -1,27 +1,25 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Course from "./components/Course";
+import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
 import {ChakraProvider, extendTheme, withDelay} from '@chakra-ui/react';
-import Header from "./components/Header.jsx";
-import List from './components/List.jsx'
-import Questions from "./components/Questions.jsx";
-import Footer from './components/Footer.jsx'
-import {Button} from "@chakra-ui/react";
-import './App.css'
+import Header from './components/Header.jsx';
+import List from './components/List.jsx';
+import Questions from './components/Questions.jsx';
+import Footer from './components/Footer.jsx';
+import {Button} from '@chakra-ui/react';
+import './App.css';
 
 // 创建主题配置
 const theme = extendTheme({
     config: {
         initialColorMode: 'light',
-        useSystemColorMode: false,
+        useSystemColorMode: false
     },
     colors: {
         brand: {
-            100: "#f7fafc",
-            900: "#1a202c",
-        },
+            100: '#f7fafc',
+            900: '#1a202c'
+        }
     }
-})
+});
 
 function App() {
     return (
@@ -56,7 +54,7 @@ function App() {
                         </div>
                     </div>
                     <div className={'app-hot-questions'}>
-                     <div>
+                        <div>
                             <span>热门问题</span>
                         </div>
                         <div>
@@ -73,18 +71,6 @@ function App() {
                         </div>
                     </div>
                     <Footer></Footer>
-                    {/*<ul>*/}
-                    {/*    <li>*/}
-                    {/*        <Link to="/">首页</Link>*/}
-                    {/*    </li>*/}
-                    {/*    <li>*/}
-                    {/*        <Link to="/course">课程</Link>*/}
-                    {/*    </li>*/}
-                    {/*</ul>*/}
-                    {/*<Routes>*/}
-                    {/*    <Route exact path="/" Component={Home}></Route>*/}
-                    {/*    <Route path="/course" Component={Course}></Route>*/}
-                    {/*</Routes>*/}
                 </div>
             </ChakraProvider>
         </BrowserRouter>
