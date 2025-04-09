@@ -5,12 +5,18 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = Cookies.get('auth_token');
-    if (token) {
+    const rememberMe = Cookies.get('remember_me');
+    if (token && rememberMe === 'true') {
       setIsAuthenticated(true);
+    } else if (!rememberMe && token) {
+      // 如果没有记住我但有token，清除所有认证相关cookie
+      logout();
     }
+    setIsLoading(false);
   }, []);
 
   const register = async (username, password, email) => {
@@ -43,12 +49,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (username, password) => {
+  const login = async (username, password, rememberMe = false) => {
     try {
       // ===== 临时测试账号逻辑 - 开发完成后删除开始 =====
       if (username === 'admin' && password === 'admin') {
-        Cookies.set('auth_token', 'admin_token', { expires: 7 });
-        Cookies.set('username', 'admin', { expires: 7 });
+        const expiresIn = rememberMe ? 7 : 1;
+        Cookies.set('auth_token', 'admin_token', { expires: expiresIn });
+        Cookies.set('username', 'admin', { expires: expiresIn });
+        Cookies.set('remember_me', rememberMe.toString(), { expires: expiresIn });
         setIsAuthenticated(true);
         return { success: true };
       }
@@ -68,8 +76,10 @@ export const AuthProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.ok) {
-        Cookies.set('auth_token', data.token, { expires: 7 });
-        Cookies.set('username', username, { expires: 7 });
+        const expiresIn = rememberMe ? 7 : 1;
+        Cookies.set('auth_token', data.token, { expires: expiresIn });
+        Cookies.set('username', username, { expires: expiresIn });
+        Cookies.set('remember_me', rememberMe.toString(), { expires: expiresIn });
         setIsAuthenticated(true);
         return { success: true };
       } else {
@@ -84,8 +94,13 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     Cookies.remove('auth_token');
     Cookies.remove('username');
+    Cookies.remove('remember_me');
     setIsAuthenticated(false);
   };
+
+  if (isLoading) {
+    return null; // 或者返回一个加载指示器
+  }
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout, register }}>

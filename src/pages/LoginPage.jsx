@@ -62,7 +62,7 @@ function LoginPage() {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        const result = await login(formData.username, formData.password);
+        const result = await login(formData.username, formData.password, formData.rememberMe);
         if (result.success) {
           navigate('/home');
         } else {
