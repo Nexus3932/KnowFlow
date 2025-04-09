@@ -64,7 +64,7 @@ function RegisterPage() {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        const result = register(formData.username, formData.password, formData.email);
+        const result = await register(formData.username, formData.password, formData.email);
         if (result.success) {
           navigate('/home');
         } else {

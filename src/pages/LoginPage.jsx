@@ -62,11 +62,11 @@ function LoginPage() {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        const success = login(formData.username, formData.password);
-        if (success) {
+        const result = await login(formData.username, formData.password);
+        if (result.success) {
           navigate('/home');
         } else {
-          setErrors({ general: "用户名或密码错误" });
+          setErrors({ general: result.message || "用户名或密码错误" });
         }
       } catch (error) {
         console.error("登录失败:", error);
