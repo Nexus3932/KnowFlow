@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import {
   Modal,
   ModalOverlay,
@@ -22,9 +24,9 @@ import {
 } from "@chakra-ui/react";
 
 function LoginPage() {
-  // Modal状态管理 - 默认打开，且不允许关闭
-  const { isOpen, onOpen } = useDisclosure({ defaultIsOpen: true });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { isOpen } = useDisclosure({ defaultIsOpen: true });
 
   // 状态管理
   const [formData, setFormData] = useState({
@@ -60,17 +62,15 @@ function LoginPage() {
     if (validateForm()) {
       setIsLoading(true);
       try {
-        // 这里应该添加实际的登录API调用
-        console.log("登录信息:", formData);
-        // 模拟API调用
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // 登录成功，设置状态
-        setIsLoggedIn(true);
-        alert("登录成功!");
+        const success = login(formData.username, formData.password);
+        if (success) {
+          navigate('/home');
+        } else {
+          setErrors({ general: "用户名或密码错误" });
+        }
       } catch (error) {
         console.error("登录失败:", error);
-        setErrors({ general: "登录失败，请检查用户名和密码" });
+        setErrors({ general: "登录失败，请稍后重试" });
       } finally {
         setIsLoading(false);
       }
@@ -80,10 +80,10 @@ function LoginPage() {
   return (
     <ChakraProvider>
       <Modal
-        isOpen={isOpen && !isLoggedIn}
-        onClose={() => {}} // 空函数防止模态框关闭
-        closeOnOverlayClick={false} // 禁止点击背景关闭
-        closeOnEsc={false} // 禁止Esc键关闭
+        isOpen={isOpen}
+        onClose={() => {}}
+        closeOnOverlayClick={false}
+        closeOnEsc={false}
         isCentered
       >
         <ModalOverlay />
@@ -185,15 +185,6 @@ function LoginPage() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
-      {/* 登录成功后显示主应用内容 */}
-      {isLoggedIn && (
-        <Box p={5}>
-          <Text fontSize="xl">您已成功登录！</Text>
-          <Text mt={2}>现在您可以访问网站的所有内容</Text>
-          {/* 这里可以放置应用的主要内容 */}
-        </Box>
-      )}
     </ChakraProvider>
   );
 }
