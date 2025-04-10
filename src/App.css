@@ -6,7 +6,7 @@
 
 .main-body > div:first-child {
     display: flex;
-    width: 800px;
+    width: 635px;
     height: 50px;
     justify-content: space-between;
     align-items: center;
@@ -127,6 +127,7 @@ button {
 
 .questions {
     transform: translateY(-4px);
+    width: 684px;
 }
 
 .main-body > div:nth-child(2) {
@@ -137,3 +138,14 @@ button {
     cursor: grab;
 }
 
+.app-tags {
+    transform: translate(1100px, 80px);
+}
+
+.app-hot-questions {
+    transform: translate(1100px, 220px);
+}
+
+.questions {
+    height: 492px;
+}
