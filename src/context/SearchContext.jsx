@@ -6,6 +6,7 @@ export const SearchProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // 提供给子组件的value
   const value = {
@@ -14,7 +15,9 @@ export const SearchProvider = ({ children }) => {
     isSearching,
     setIsSearching,
     searchResults,
-    setSearchResults
+    setSearchResults,
+    isLoading,
+    setIsLoading
   };
 
   return (

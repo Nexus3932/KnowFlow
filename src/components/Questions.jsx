@@ -26,7 +26,8 @@ const Questions = () => {
         searchResults, 
         setSearchQuery, 
         setIsSearching, 
-        setSearchResults 
+        setSearchResults,
+        isLoading
     } = useSearch();
 
     const pageSize = 10; // 每次新增加载的问题数量
@@ -87,7 +88,10 @@ const Questions = () => {
     // 监听搜索结果的变化
     useEffect(() => {
         if (isSearching && searchResults.length > 0) {
+            // 直接使用搜索结果更新问题列表
             setQuestions(searchResults);
+            // 设置为没有更多数据，禁用无限滚动
+            setHasMore(false);
         }
     }, [isSearching, searchResults]);
 
@@ -233,7 +237,15 @@ const Questions = () => {
                 </Flex>
             )}
 
-            {loading ? (
+            {/* 显示搜索加载状态 */}
+            {isLoading ? (
+                <Center py={6}>
+                    <VStack spacing={4}>
+                        <Spinner size="xl" color="blue.500" thickness="4px" />
+                        <Text>正在搜索中，请稍候...</Text>
+                    </VStack>
+                </Center>
+            ) : loading ? (
                 <Center py={6}>
                     <Spinner size="md" />
                 </Center>
