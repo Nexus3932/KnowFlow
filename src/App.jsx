@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import { AuthProvider } from './context/AuthContext';
+import { SearchProvider } from './context/SearchContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 // 导入其他页面组件
 import "./App.css";
@@ -29,30 +30,32 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
-        <Router>
-          <Box className="app-container" height="100%" position="relative">
-            <Header />
-            <List />
+        <SearchProvider>
+          <Router>
+            <Box className="app-container" height="100%" position="relative">
+              <Header />
+              <List />
 
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route
-                path="/home"
-                element={
-                  <ProtectedRoute>
-                    <HomePage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/" element={<Navigate to="/home" replace />} />
-              {/* 捕获所有未匹配的路由，重定向到首页 */}
-              <Route path="*" element={<Navigate to="/home" replace />} />
-            </Routes>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route
+                  path="/home"
+                  element={
+                    <ProtectedRoute>
+                      <HomePage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                {/* 捕获所有未匹配的路由，重定向到首页 */}
+                <Route path="*" element={<Navigate to="/home" replace />} />
+              </Routes>
 
-            <Footer />
-          </Box>
-        </Router>
+              <Footer />
+            </Box>
+          </Router>
+        </SearchProvider>
       </AuthProvider>
     </ChakraProvider>
   );

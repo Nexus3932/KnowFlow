@@ -28,6 +28,13 @@
         border-radius: 20px;
       }
 
+      /* 搜索组样式 */
+      .header-search-group {
+        display: inline-flex;
+        width: 400px;
+        margin-left: 20px;
+      }
+
       /* 设置placeholder的颜色 */
       .header-Input::placeholder {
         color: #333333;

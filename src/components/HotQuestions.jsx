@@ -7,11 +7,21 @@ function HotQuestions() {
       <div>
         <ul>
           <li>
-            <p>What is a tag?</p>
+            <p style={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%'
+            }}>What is a tag?</p>
             <p>1个回答</p>
           </li>
           <li>
-            <p>What is reputation and how do I earn them?</p>
+            <p style={{
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%'
+            }}>What is reputation and how do I earn them?</p>
             <p>1个回答</p>
           </li>
         </ul>
